@@ -1,3 +1,4 @@
 from Methods.getAllCategories import getAllCategories
 
-getAllCategories()
+all_categories = getAllCategories()
+print(all_categories)
