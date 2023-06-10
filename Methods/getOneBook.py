@@ -1,12 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
-from os import path
+import os
 
 
 def getOneBook(url_book):
     base_url = 'https://books.toscrape.com/'
-    data_repository = r'.\data\img'
+    data_repository = os.path.dirname(__file__)
+    data_repository = os.path.join(os.path.dirname(data_repository), 'data\\images')
     response = requests.get(url_book)
     response.encoding = 'UTF-8'
     if response.status_code == 200:
@@ -43,10 +44,14 @@ def getOneBook(url_book):
 
         # Chemin local de l'image téléchargée
         image_path = soup.find('div', {'id': 'product_gallery'}).find('img')['src']
+        # Nom du fichier image
         filename_image = image_path.split("/")[-1]
 
         # URL de l'image
         image_url = base_url + image_path[6:]
+
+        # Chemin complet de l'image
+        image_path = os.path.join(data_repository, f"{category.lower()}\\{filename_image}")
 
         # Nombre d'étoile
         rating_stars = soup.find('div', class_='product_main').find("p", class_='star-rating')['class'][1]
@@ -61,7 +66,7 @@ def getOneBook(url_book):
         'Description du produit': product_description,
         'Catégorie': category,
         'Rating': rating_stars,
-        "Chemin local de l'image téléchargée": path.join(data_repository, filename_image),
+        "Chemin local de l'image téléchargée": image_path,
         "URL de l'image": image_url
     }
     return dict_book
