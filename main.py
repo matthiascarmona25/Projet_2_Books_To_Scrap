@@ -3,6 +3,9 @@ from Methods.getAllPages import getAllPages
 from Methods.getAllBooks import getAllBooks
 from Methods.getOneBook import getOneBook
 
+from pprint import pprint
+
+list_all_books = []
 all_categories = getAllCategories()
 # print(all_categories)
 
@@ -16,7 +19,9 @@ for category in all_categories:
         for book in all_books:
             one_book = getOneBook(url_book=book)
             print(f"    {one_book}")
+            list_all_books.append(one_book)
 
+pprint(list_all_books)
 
 
 
