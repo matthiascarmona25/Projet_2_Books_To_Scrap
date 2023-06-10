@@ -53,6 +53,11 @@ def getOneBook(url_book):
         # Chemin complet de l'image
         image_path = os.path.join(data_repository, f"{category.lower()}\\{filename_image}")
 
+        # Téléchargement de l'image
+        img_data = requests.get(image_url).content
+        with open(image_path, 'wb') as handler:
+            handler.write(img_data)
+
         # Nombre d'étoile
         rating_stars = soup.find('div', class_='product_main').find("p", class_='star-rating')['class'][1]
 

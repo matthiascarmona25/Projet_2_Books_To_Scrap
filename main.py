@@ -21,7 +21,7 @@ for category in all_categories:
             print(f"    {one_book}")
             list_all_books.append(one_book)
 
-pprint(list_all_books)
+print(list_all_books)
 
 
 
