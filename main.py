@@ -6,13 +6,16 @@ from Methods.getOneBook import getOneBook
 all_categories = getAllCategories()
 # print(all_categories)
 
-all_pages_by_category = getAllPages('https://books.toscrape.com/catalogue/category/books/sequential-art_5/index.html')
-# print(all_pages_by_category)
-
-all_books = getAllBooks('https://books.toscrape.com/catalogue/category/books/travel_2/index.html')
-# print(all_books)
-
-getOneBook('https://books.toscrape.com/catalogue/its-only-the-himalayas_981/index.html')
+for category in all_categories:
+    all_pages_by_category = getAllPages(url_category=category)
+    # print(all_pages_by_category)
+    for one_page_by_category in all_pages_by_category:
+        print(one_page_by_category)
+        all_books = getAllBooks(url_category_pages=one_page_by_category)
+        # print(all_books)
+        for book in all_books:
+            one_book = getOneBook(url_book=book)
+            print(f"    {one_book}")
 
 
 

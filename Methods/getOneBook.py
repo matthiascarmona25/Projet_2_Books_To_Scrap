@@ -31,7 +31,11 @@ def getOneBook(url_book):
         quantity = quantity[10:-1].split(" ")[0]
 
         # Description du livre
-        product_description = soup.find('div', {'id': 'product_description'}).find_next_sibling().string
+        product_description = soup.find('div', {'id': 'product_description'})
+        if product_description is not None:
+            product_description = product_description.find_next_sibling().string
+        else:
+            product_description = ''
 
         # Catégorie du livre
         category = soup.find('ul', class_='breadcrumb').find_all('li')
@@ -47,7 +51,7 @@ def getOneBook(url_book):
         # Nombre d'étoile
         rating_stars = soup.find('div', class_='product_main').find("p", class_='star-rating')['class'][1]
 
-    dict_books = {
+    dict_book = {
         'URL du livre': url_book,
         'UPC': universal_product_code,
         'Titre du livre': title.string,
@@ -60,5 +64,5 @@ def getOneBook(url_book):
         "Chemin local de l'image téléchargée": path.join(data_repository, filename_image),
         "URL de l'image": image_url
     }
-    pprint(dict_books)
+    return dict_book
 
