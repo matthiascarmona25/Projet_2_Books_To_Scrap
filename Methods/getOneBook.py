@@ -71,8 +71,8 @@ def getOneBook(url_book):
         'Description du produit': product_description,
         'Catégorie': category,
         'Rating': rating_stars,
-        "Chemin local de l'image téléchargée": image_path,
-        "URL de l'image": image_url
+        'Chemin local de l\'image téléchargée': image_path,
+        'URL de l\'image': image_url
     }
     return dict_book
 

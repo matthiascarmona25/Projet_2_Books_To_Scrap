@@ -20,11 +20,16 @@ def getAllCategories():
             .find_all('li')
         for category_url in categories_url:
             category_repository = category_url.find('a').string
-            category_repository = category_repository.strip().lower()
-            category_repository = os.path.join(data_repository, category_repository)
+            category_repository_clean = category_repository.strip().lower()
+            category_repository = os.path.join(data_repository, category_repository_clean)
             isExist = os.path.exists(category_repository)
             if not isExist:
                 os.mkdir(category_repository)
             category_url = base_url + category_url.find('a')['href']
-            list_categories.append(category_url)
+            list_categories.append(
+                {
+                    'categorie_url': category_url,
+                    'categorie_name': category_repository_clean
+                }
+            )
         return list_categories
